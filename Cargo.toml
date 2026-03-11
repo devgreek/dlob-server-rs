@@ -1,0 +1,56 @@
+[package]
+name = "dlob-server-rs"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# --- Solana & Drift Protocol ---
+drift-rs = "1.0.0-alpha.16"        # Official SDK for Drift V2
+solana-sdk = "1.18"
+solana-client = "1.18"
+anchor-client = "0.29.0"
+yellowstone-grpc-client = "12.1.0" # Equivalent to triton-one/yellowstone-grpc
+pyth-hermes-client = "0.5.3"       # Equivalent to pythnetwork/hermes-client
+
+# --- AWS SDK ---
+aws-config = { version = "1.1", features = ["behavior-version-latest"] }
+aws-sdk-athena = "1.1"
+aws-sdk-kinesis = "1.1"
+
+# --- Web Server & Networking (Express/Axum Equivalent) ---
+axum = { version = "0.7", features = ["macros"] }
+tower-http = { version = "0.5", features = [
+    "cors",
+    "compression-full",
+    "trace",
+    "response-header",
+] }
+tokio = { version = "1.36", features = ["full"] }
+reqwest = { version = "0.11", features = [
+    "json",
+    "rustls-tls",
+] } # Equivalent to axios/undici
+tokio-tungstenite = "0.21" # Equivalent to ws (WebSockets)
+
+# --- Database & State ---
+redis = { version = "0.24", features = [
+    "tokio-comp",
+    "connection-manager",
+] } # ioredis equivalent
+async-mutex = "0.4" # Or use tokio::sync::Mutex
+
+# --- Observability & Logging (Winston/Morgan Equivalent) ---
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+opentelemetry = { version = "0.21", features = ["metrics", "trace"] }
+opentelemetry-prometheus = "0.14"
+opentelemetry-sdk = "0.21"
+
+# --- Utilities ---
+clap = { version = "4.4", features = ["derive"] }  # Equivalent to commander
+dotenvy = "0.15"                                   # Equivalent to dotenv
+governor = "0.6"                                   # Equivalent to bottleneck (Rate limiting)
+futures = "0.3"                                    # Equivalent to RxJS (core streaming logic)
+tokio-stream = "0.1"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
